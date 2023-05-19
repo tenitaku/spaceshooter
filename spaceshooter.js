@@ -240,13 +240,12 @@ function hideButton(button) {
   button.style.display = 'none';
 }
 
-// 初期化とゲームの開始
 function start() {
-  canvas = document.getElementById('gameCanvas');
-  ctx = canvas.getContext('2d');
-
-  init();
-}
-
-// ページの読み込み後にゲームを開始
-window.addEventListener('load', start);
+    canvas = document.getElementById('gameCanvas');
+    ctx = canvas.getContext('2d');
+  
+    init();
+  }
+  
+window.addEventListener('DOMContentLoaded', start);
+  
