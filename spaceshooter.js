@@ -57,6 +57,8 @@ document.addEventListener("DOMContentLoaded", function() {
       spawnEnemy();
       draw();
       update();
+      gameOverText.style.display = "none";
+      retryButton.style.display = "none";
     }
   
     function handleKeyDown(event) {
@@ -130,6 +132,7 @@ document.addEventListener("DOMContentLoaded", function() {
             enemies.splice(j, 1);
             j--;
             score++;
+            break;
           }
         }
       }
