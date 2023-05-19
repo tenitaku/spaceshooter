@@ -38,7 +38,30 @@ document.getElementById('rightBtn').addEventListener('touchend', function() {
     player.dx = 0;
 });
 
-var gameInterval = setInterval(gameLoop, 10);
+document.getElementById('retryBtn').addEventListener('click', function() {
+    resetGame();
+    this.style.display = 'none';
+});
+
+var gameInterval;
+
+function startGame() {
+    gameInterval = setInterval(gameLoop, 10);
+}
+
+function resetGame() {
+    clearInterval(gameInterval);
+    player.x = canvas.width / 2;
+    player.y = canvas.height - 50;
+    player.dx = 0;
+    enemies = [];
+    playerLasers = [];
+    enemyLasers = [];
+    score = 0;
+    document.getElementById('score').innerText = 'Score: ' + score;
+    document.getElementById('retryBtn').style.display = 'none';
+    startGame();
+}
 
 function gameLoop() {
     // Clear screen
@@ -147,7 +170,7 @@ function gameLoop() {
             laser.y + laser.height > player.y) {
             // Collision detected
             clearInterval(gameInterval);
-            alert('Game Over!');
+            document.getElementById('retryBtn').style.display = 'block';
             break;
         }
     }
@@ -161,7 +184,7 @@ function gameLoop() {
             enemy.y + enemy.height > player.y) {
             // Collision detected
             clearInterval(gameInterval);
-            alert('Game Over!');
+            document.getElementById('retryBtn').style.display = 'block';
             break;
         }
     }
@@ -175,3 +198,4 @@ function gameLoop() {
     }
 }
 
+startGame();
