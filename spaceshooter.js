@@ -17,7 +17,8 @@ document.addEventListener("DOMContentLoaded", function() {
     };
   
     // Laser
-    const laserHeight = 10;
+    const laserWidth = 10;
+    const laserHeight = 20;
     const laserSpeed = 10;
     const lasers = [];
   
@@ -31,9 +32,16 @@ document.addEventListener("DOMContentLoaded", function() {
     let score = 0;
     let isGameOver = false;
   
+    // Game over text
+    const gameOverText = document.getElementById("gameOverText");
+  
+    // Retry button
+    const retryButton = document.getElementById("retryButton");
+  
     // Event listeners
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("keyup", handleKeyUp);
+    retryButton.addEventListener("click", startGame);
   
     // Start the game
     startGame();
@@ -44,29 +52,25 @@ document.addEventListener("DOMContentLoaded", function() {
       player.x = canvas.width / 2 - playerWidth / 2;
       player.isMovingLeft = false;
       player.isMovingRight = false;
-      enemies.length = 0;
       lasers.length = 0;
+      enemies.length = 0;
       spawnEnemy();
       draw();
       update();
     }
   
     function handleKeyDown(event) {
-      if (event.keyCode === 37) {
-        // Left arrow key
+      if (event.key === "ArrowLeft") {
         player.isMovingLeft = true;
-      } else if (event.keyCode === 39) {
-        // Right arrow key
+      } else if (event.key === "ArrowRight") {
         player.isMovingRight = true;
       }
     }
   
     function handleKeyUp(event) {
-      if (event.keyCode === 37) {
-        // Left arrow key
+      if (event.key === "ArrowLeft") {
         player.isMovingLeft = false;
-      } else if (event.keyCode === 39) {
-        // Right arrow key
+      } else if (event.key === "ArrowRight") {
         player.isMovingRight = false;
       }
     }
@@ -76,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function() {
         return;
       }
   
-      // Move the player
+      // Move player
       if (player.isMovingLeft && player.x > 0) {
         player.x -= playerSpeed;
       } else if (player.isMovingRight && player.x + player.width < canvas.width) {
@@ -101,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function() {
         enemy.y += enemySpeed;
   
         // Check collision with player
-        if (checkCollision(enemy, player)) {
+        if (checkCollision(player, enemy)) {
           gameOver();
           return;
         }
@@ -140,32 +144,25 @@ document.addEventListener("DOMContentLoaded", function() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
   
       // Draw player
-      ctx.fillStyle = "#ff0000";
+      ctx.fillStyle = "red";
       ctx.fillRect(player.x, player.y, player.width, player.height);
   
       // Draw lasers
-      ctx.fillStyle = "#00ff00";
+      ctx.fillStyle = "green";
       for (const laser of lasers) {
         ctx.fillRect(laser.x, laser.y, laser.width, laser.height);
       }
   
       // Draw enemies
-      ctx.fillStyle = "#0000ff";
+      ctx.fillStyle = "blue";
       for (const enemy of enemies) {
         ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
       }
   
       // Draw score
-      ctx.fillStyle = "#000000";
+      ctx.fillStyle = "black";
       ctx.font = "24px Arial";
       ctx.fillText("Score: " + score, 10, 30);
-  
-      // Game over
-      if (isGameOver) {
-        ctx.fillStyle = "#000000";
-        ctx.font = "48px Arial";
-        ctx.fillText("Game Over", canvas.width / 2 - 120, canvas.height / 2);
-      }
     }
   
     function spawnEnemy() {
@@ -183,6 +180,8 @@ document.addEventListener("DOMContentLoaded", function() {
   
     function gameOver() {
       isGameOver = true;
+      gameOverText.style.display = "block";
+      retryButton.style.display = "block";
     }
   
     function checkCollision(rect1, rect2) {
