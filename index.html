@@ -1,52 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Space Shooter</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            background: #000;
-            color: #fff;
-            text-align: center;
-        }
-
-        canvas {
-            display: block;
-            margin: 20px auto;
-            background: #000;
-        }
-
-        #score {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            color: #fff;
-        }
-
-        #controls {
-            position: fixed;
-            bottom: 20px;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 20px;
-        }
-
-        .button {
-            padding: 10px;
-            font-size: 20px;
-            width: 100px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Space Shooter</title>
+  <style>
+    #gameCanvas {
+      border: 1px solid black;
+    }
+  </style>
 </head>
 <body>
-    <div id="score">Score: 0</div>
-    <canvas id="gameCanvas"></canvas>
-    <div id="controls">
-        <button id="leftBtn" class="button">Left</button>
-        <button id="rightBtn" class="button">Right</button>
-    </div>
-    <button id="retryBtn" class="button" style="display: none;">Retry</button>
-    <script src="spaceshooter.js"></script>
+  <canvas id="gameCanvas" width="480" height="320"></canvas>
+  <script src="spaceshooter.js"></script>
 </body>
 </html>
