@@ -115,14 +115,14 @@ function render() {
 
 // プレーヤーの移動処理
 function movePlayer() {
-  if (keys.ArrowLeft && player.x > 0) {
-    player.x -= 5;
+    if (keys['ArrowLeft'] && player.x > 0) {
+      player.x -= 5;
+    }
+  
+    if (keys['ArrowRight'] && player.x < canvas.width - player.width) {
+      player.x += 5;
+    }
   }
-
-  if (keys.ArrowRight && player.x < canvas.width - player.width) {
-    player.x += 5;
-  }
-}
 
 // ミサイルの移動処理
 function moveMissile() {
@@ -202,16 +202,17 @@ function updateScore() {
 
 // キーの押下状態を記録
 function handleKeyDown(e) {
-  keys[e.code] = true;
-
-  if (e.code === 'Space' && !missile.isActive) {
-    fireMissile();
+    keys[e.key] = true;
+  
+    if (e.key === ' ') { // スペースキー
+      e.preventDefault(); // ブラウザのデフォルトのスクロールなどを無効化
+      fireMissile();
+    }
   }
-}
 
 // キーの解放状態を記録
 function handleKeyUp(e) {
-  keys[e.code] = false;
+    keys[e.key] = false;
 }
 
 // ミサイルを発射
