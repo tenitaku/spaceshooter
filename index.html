@@ -1,50 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
   <title>Space Shooter</title>
   <style>
-    body {
-      background-color: #f1f1f1;
-      margin: 0;
-      padding: 0;
-    }
-
-    #gameCanvas {
+    canvas {
       border: 1px solid black;
-    }
-
-    #gameOverText {
-      display: none;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 48px;
-      font-family: Arial;
-      color: black;
-    }
-
-    #retryButton {
-      display: none;
-      position: absolute;
-      top: 60%;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 10px 20px;
-      font-size: 24px;
-      font-family: Arial;
-      background-color: #4caf50;
-      color: white;
-      border: none;
-      cursor: pointer;
+      display: block;
+      margin: 0 auto;
     }
   </style>
 </head>
 <body>
-  <canvas id="gameCanvas" width="480" height="320"></canvas>
-  <div id="gameOverText">Game Over</div>
-  <button id="retryButton">Retry</button>
+  <canvas id="gameCanvas" width="800" height="600"></canvas>
+
   <script src="spaceshooter.js"></script>
 </body>
 </html>
